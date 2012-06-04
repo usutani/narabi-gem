@@ -1,6 +1,6 @@
 module Narabi
-  NORMAL_REGEXP = /^(.+)->(.+):(.*)/
-  RESPONSE_REGEXP = /^(.+)-->(.+):(.*)/
+  NORMAL_REGEXP = /^(.+)->(.+):\s?(.*)/
+  RESPONSE_REGEXP = /^(.+)-->(.+):\s?(.*)/
 
   class Sequence
     attr_reader :sender, :receiver, :message, :is_normal

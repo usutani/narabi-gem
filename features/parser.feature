@@ -14,10 +14,11 @@
 
     例:
       | 入力値                   | 送信元   | 受信先   | 電文            |
-      | "Foo->Bar: Some message" | "Foo"    | "Bar"    | " Some message" |
-      | "Bar-->Foo: Response"    | "Bar"    | "Foo"    | " Response"     |
-      | " A 1 -> B 1 : M1 "      | " A 1 "  |  " B 1 " | " M1 "          |
+      | "Foo->Bar: Some message" | "Foo"    | "Bar"    | "Some message"  |
+      | "Bar-->Foo: Response"    | "Bar"    | "Foo"    | "Response"      |
+      | " A 1 -> B 1 : M1 "      | " A 1 "  |  " B 1 " | "M1 "           |
       | "太郎->花子:"            | "太郎"   | "花子"   | ""              |
+      | "太郎->花子:   "         | "太郎"   | "花子"   | "  "            |
 
   シナリオアウトライン: 呼び出しと応答
     前提 一行の文字列<入力値>を入力する
