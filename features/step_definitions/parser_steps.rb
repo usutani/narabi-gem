@@ -46,3 +46,7 @@ end
   @output.should == nil
 end
 
+ならば /^インスタンスは"(.*?)"となること$/ do |expected_name|
+  @output["is_instance"].should be_true
+  @output["name"].should == expected_name
+end
