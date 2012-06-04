@@ -12,24 +12,24 @@ end
   @output = Narabi.parse_line(@input)
 end
 
-ならば /^送信元は"(#{CAPTURE_STRING})"となること$/ do |expected_sender|
-  @output.sender.should == expected_sender
+ならば /^送信元は"(#{CAPTURE_STRING})"となること$/ do |expected_from|
+  @output.from.should == expected_from
 end
 
-ならば /^受信先は"(#{CAPTURE_STRING})"となること$/ do |expected_receiver|
-  @output.receiver.should == expected_receiver
+ならば /^受信先は"(#{CAPTURE_STRING})"となること$/ do |expected_to|
+  @output.to.should == expected_to
 end
 
-ならば /^電文は"(#{CAPTURE_STRING})"となること$/ do |expected_message|
-  @output.message.should == expected_message
+ならば /^電文は"(#{CAPTURE_STRING})"となること$/ do |expected_body|
+  @output.body.should == expected_body
 end
 
 ならば /^種類は呼び出しとなること$/ do
-  @output.is_return == false
+  @output.is_return.should be_false
 end
 
 ならば /^種類は応答となること$/ do
-  @output.is_return == true
+  @output.is_return.should be_true
 end
 
 ならば /^シーケンスは不正$/ do
