@@ -25,11 +25,11 @@ end
 end
 
 ならば /^種類は呼び出しとなること$/ do
-  @output.is_normal == true
+  @output.is_return == false
 end
 
 ならば /^種類は応答となること$/ do
-  @output.is_normal == false
+  @output.is_return == true
 end
 
 ならば /^シーケンスは不正$/ do
