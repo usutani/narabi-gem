@@ -1,39 +1,51 @@
 module Narabi
-  NORMAL_REGEXP = /^(.+)->(.+):\s?(.*)/
-  RESPONSE_REGEXP = /^(.+)-->(.+):\s?(.*)/
-  NOTE_REGEXP = /^note\s(.+):\s?(.*)/
+  NORMAL_REGEXP = /^(?<from>.+)->(?<to>.+):\s?(?<body>.*)/
+  RESPONSE_REGEXP = /^(?<from>.+)-->(?<to>.+):\s?(?<body>.*)/
+  NOTE_REGEXP = /^note\s(?<from>.+):\s?(?<body>.*)/
 
   class Message
-    attr_reader :from, :to, :body, :is_return, :is_note
-
-    def initialize(match, is_return = false, is_note = false)
-      @from, @to, @body = match.values_at(1..3)
-      @is_return = is_return
-      @is_note = is_note
+    def self.try_to_create(regexp, src)
+      return nil unless match = regexp.match(src)
+      indexes = regexp.named_captures
+      hash = {}
+      regexp.names.each do |name|
+        hash[name] = match[indexes[name].first]
+      end
+      hash
     end
 
-    def self.create_normal(match)
-      return Message.new(match)
+    def self.create_normal(src)
+      msg = self.try_to_create(NORMAL_REGEXP, src)
+      #msg["is_return"] = false if msg
+      #msg["is_note"] = false if msg
+      msg
     end
 
-    def self.create_return(match)
-      return Message.new(match, true)
+    def self.create_return(src)
+      msg = self.try_to_create(RESPONSE_REGEXP, src)
+      msg["is_return"] = true if msg
+      #msg["is_note"] = false if msg
+      msg
     end
 
-    def self.create_note(match)
-      return Message.new(match, false, true)
+    def self.create_note(src)
+      msg = self.try_to_create(NOTE_REGEXP, src)
+      #msg["is_return"] = false if msg
+      #msg["to"] = "" if msg
+      msg["is_note"] = true if msg
+      msg
     end
   end
 
   def self.parse_line(src)
-    if match = RESPONSE_REGEXP.match(src)
-      return Message.create_return(match)
+    if msg = Message.create_return(src)
+      return msg
     end
-    if match = NORMAL_REGEXP.match(src)
-      return Message.create_normal(match)
+    if msg = Message.create_normal(src)
+      return msg
     end
-#    if match = NOTE_REGEXP.match(src)
-#      nil
-#    end
+    if msg = Message.create_note(src)
+      return msg
+    end
   end
 end
