@@ -30,13 +30,19 @@ end
 
 ならば /^種類は呼び出しとなること$/ do
   @output["is_return"].should be_false
+  @output["is_note"].should be_false
 end
 
 ならば /^種類は応答となること$/ do
   @output["is_return"].should be_true
+  @output["is_note"].should be_false
 end
 
-ならば /^シーケンスは不正$/ do
+ならば /^種類はノートとなること$/ do
+  @output["is_note"].should be_true
+end
+
+ならば /^メッセージは不正$/ do
   @output.should == nil
 end
 
