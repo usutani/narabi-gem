@@ -24,8 +24,8 @@ end
   @output[:to].should be_nil
 end
 
-ならば /^電文は"(#{CAPTURE_STRING})"となること$/ do |expected_message|
-  @output[:message].should == expected_message
+ならば /^電文は"(#{CAPTURE_STRING})"となること$/ do |expected_body|
+  @output[:body].should == expected_body
 end
 
 ならば /^種類は呼び出しとなること$/ do
