@@ -31,6 +31,7 @@
       | 入力値                       | 送信元 | 受信先 | 電文              |
       | "note User: This is a note." | "User" | "User" | "This is a note." |
       | "note User:"                 | "User" | "User" | ""                |
+      | "note F 1: http://..."       | "F 1"  | "F 1"  | "http://..."      |
 
   シナリオアウトライン: 呼び出しと応答
     前提 一行の文字列<入力値>を入力する
