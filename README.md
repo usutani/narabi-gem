@@ -1,4 +1,4 @@
 TODO
 ====
 
-- Changing the order of instances
+- Support instance alias

@@ -46,7 +46,10 @@ end
   @output.should == nil
 end
 
+もし /^一行のインスタンス文字列を解析する$/ do
+  @output = Narabi::Instance.parse_line(@input)
+end
+
 ならば /^インスタンスは"(.*?)"となること$/ do |expected_name|
-  @output["is_instance"].should be_true
   @output["name"].should == expected_name
 end

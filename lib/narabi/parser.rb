@@ -41,10 +41,8 @@ module Narabi
   end
 
   class Instance
-    def self.create_instance(src)
+    def self.parse_line(src)
       msg = Base.try_to_create(INSTANCE_REGEXP, src)
-      msg["is_instance"] = true if msg
-      msg
     end
   end
 
@@ -56,9 +54,6 @@ module Narabi
       return msg
     end
     if msg = Message.create_note(src)
-      return msg
-    end
-    if msg = Instance.create_instance(src)
       return msg
     end
   end
