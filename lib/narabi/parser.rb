@@ -10,7 +10,7 @@ module Narabi
       indexes = regexp.named_captures
       hash = {}
       regexp.names.each do |name|
-        hash[name] = match[indexes[name].first]
+        hash[name.to_sym] = match[indexes[name].first]
       end
       hash
     end
@@ -19,23 +19,23 @@ module Narabi
   class Message
     def self.create_normal(src)
       msg = Base.try_to_create(NORMAL_REGEXP, src)
-      #msg["is_return"] = false if msg
-      #msg["is_note"] = false if msg
+      #msg[:is_return] = false if msg
+      #msg[:is_note] = false if msg
       msg
     end
 
     def self.create_return(src)
       msg = Base.try_to_create(RESPONSE_REGEXP, src)
-      msg["is_return"] = true if msg
-      #msg["is_note"] = false if msg
+      msg[:is_return] = true if msg
+      #msg[:is_note] = false if msg
       msg
     end
 
     def self.create_note(src)
       msg = Base.try_to_create(NOTE_REGEXP, src)
-      #msg["is_return"] = false if msg
-      #msg["to"] = "" if msg
-      msg["is_note"] = true if msg
+      #msg[:is_return] = false if msg
+      #msg[:to] = "" if msg
+      msg[:is_note] = true if msg
       msg
     end
   end
