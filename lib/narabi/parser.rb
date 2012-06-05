@@ -33,6 +33,7 @@ module Narabi
 
     def self.create_note(src)
       msg = Base.try_to_create(NOTE_REGEXP, src)
+      msg[:to] = msg[:from] if msg
       #msg[:is_return] = false if msg
       #msg[:to] = "" if msg
       msg[:is_note] = true if msg
