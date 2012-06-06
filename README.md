@@ -6,3 +6,7 @@
 
 - Support instance alias
 - Support title
+
+## Copyright
+
+Copyright (c) 2012 Technical Group Laboratory, Inc. See LICENSE for details.
