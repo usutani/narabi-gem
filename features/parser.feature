@@ -32,6 +32,8 @@
       | "note User: This is a note." | "User" | "User" | "This is a note." |
       | "note User:"                 | "User" | "User" | ""                |
       | "note F 1: http://..."       | "F 1"  | "F 1"  | "http://..."      |
+      | "note 日本: 語のノート"      | "日本" | "日本" | "語のノート"      |
+
 
   シナリオアウトライン: 呼び出しと応答
     前提 一行の文字列<入力値>を入力する

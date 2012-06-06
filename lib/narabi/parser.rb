@@ -1,7 +1,7 @@
 module Narabi
   NORMAL_REGEXP = /^(?<from>.+)->(?<to>.+):\s?(?<body>.*)/
   RESPONSE_REGEXP = /^(?<from>.+)-->(?<to>.+):\s?(?<body>.*)/
-  NOTE_REGEXP = /^note\s(?<from>(\s|\d|\w|^:)+):\s?(?<body>.*)/
+  NOTE_REGEXP = /^note\s(?<from>(\s|\b|\d|\w|\W|^:)+):\s?(?<body>.*)/
   INSTANCE_REGEXP = /^instance\s?(?<name>.+)/
 
   class Base
