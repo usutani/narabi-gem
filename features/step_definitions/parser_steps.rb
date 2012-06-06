@@ -50,6 +50,14 @@ end
   @output = Narabi::Instance.parse_line(@input)
 end
 
-ならば /^インスタンスは"(.*?)"となること$/ do |expected_name|
+ならば /^インスタンスは"(#{CAPTURE_STRING})"となること$/ do |expected_name|
   @output[:name].should == expected_name
+end
+
+もし /^一行のタイトル文字列を解析する$/ do
+  @output = Narabi::Diagram.parse_line(@input)
+end
+
+ならば /^タイトルは"(#{CAPTURE_STRING})"となること$/ do |expected_title|
+  @output[:title].should == expected_title
 end

@@ -3,6 +3,7 @@ module Narabi
   RESPONSE_REGEXP = /^(?<from>.+)-->(?<to>.+):\s?(?<body>.*)/
   NOTE_REGEXP = /^note\s(?<from>(\s|\b|\d|\w|\W|^:)+):\s?(?<body>.*)/
   INSTANCE_REGEXP = /^instance\s?(?<name>.+)/
+  TITLE_REGEXP = /^title\s(?<title>.+)/
 
   class Base
     def self.try_to_create(regexp, src)
@@ -44,6 +45,12 @@ module Narabi
   class Instance
     def self.parse_line(src)
       msg = Base.try_to_create(INSTANCE_REGEXP, src)
+    end
+  end
+
+  class Diagram
+    def self.parse_line(src)
+      msg = Base.try_to_create(TITLE_REGEXP, src)
     end
   end
 
