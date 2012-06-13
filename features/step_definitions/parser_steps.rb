@@ -9,7 +9,7 @@ end
 end
 
 もし /^一行の文字列を解析する$/ do
-  @output = Narabi.parse_line(@input)
+  @output = Narabi::Message.parse_line(@input)
 end
 
 ならば /^送信元は"(#{CAPTURE_STRING})"となること$/ do |expected_from|

@@ -18,25 +18,34 @@ module Narabi
   end
 
   class Message
+    def self.parse_line(src)
+      if msg = Message.create_return(src)
+        return msg
+      end
+      if msg = Message.create_normal(src)
+        return msg
+      end
+      if msg = Message.create_note(src)
+        return msg
+      end
+    end
+
+    private
+
     def self.create_normal(src)
       msg = Base.try_to_create(NORMAL_REGEXP, src)
-      #msg[:is_return] = false if msg
-      #msg[:is_note] = false if msg
       msg
     end
 
     def self.create_return(src)
       msg = Base.try_to_create(RESPONSE_REGEXP, src)
       msg[:is_return] = true if msg
-      #msg[:is_note] = false if msg
       msg
     end
 
     def self.create_note(src)
       msg = Base.try_to_create(NOTE_REGEXP, src)
       msg[:to] = msg[:from] if msg
-      #msg[:is_return] = false if msg
-      #msg[:to] = "" if msg
       msg[:is_note] = true if msg
       msg
     end
@@ -51,18 +60,6 @@ module Narabi
   class Diagram
     def self.parse_line(src)
       msg = Base.try_to_create(TITLE_REGEXP, src)
-    end
-  end
-
-  def self.parse_line(src)
-    if msg = Message.create_return(src)
-      return msg
-    end
-    if msg = Message.create_normal(src)
-      return msg
-    end
-    if msg = Message.create_note(src)
-      return msg
     end
   end
 end
