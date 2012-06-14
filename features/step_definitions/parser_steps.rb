@@ -61,3 +61,36 @@ end
 ならば /^タイトルは"(#{CAPTURE_STRING})"となること$/ do |expected_title|
   @output[:title].should == expected_title
 end
+
+前提 /^次のエイリアスを含むテキストを入力する:$/ do |text|
+  @input = text
+  @output = []
+end
+
+もし /^エイリアスを含むテキストを解析する$/ do
+  Narabi::Alias.scope do |parser|
+    @input.each_line do |line|
+      next if line.empty?
+
+      if ret = parser.parse_line_for_instance(line)
+        @output << ret
+        next
+      end
+      if ret = parser.parse_line_for_message(line)
+        @output << ret
+        next
+      end
+      if ret = parser.parse_line_for_diagram(line)
+        @output << ret
+        next
+      end
+    end
+  end
+end
+
+ならば /^次のハッシュの配列となる:$/ do |expected_lines|
+  lines = []
+  expected_lines.each_line { |l| lines << eval(l.strip) }
+  @output.size.should == lines.size
+  @output.each { |h| h.should == lines.shift }
+end

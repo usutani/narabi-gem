@@ -78,3 +78,26 @@
       | 入力値              | タイトル      |
       | "title title #1"    | "title #1"    |
       | "title タイトル #1" | "タイトル #1" |
+
+  シナリオ: エイリアスの解析に成功
+    前提 次のエイリアスを含むテキストを入力する:
+      """
+      title w/ instance alias
+
+      instance User as U
+      instance System
+
+      note U: This is a note.
+      U->System: Login request
+      System-->User: Response
+      """
+    もし エイリアスを含むテキストを解析する
+    ならば 次のハッシュの配列となる:
+      """
+      {:title=>"w/ instance alias"}
+      {:name=>"User",   :alias=>"U"}
+      {:name=>"System"}
+      {:from=>"User",   :to=>"User",    :body=>"This is a note.", :is_note=>true}
+      {:from=>"User",   :to=>"System",  :body=>"Login request"}
+      {:from=>"System", :to=>"User",    :body=>"Response",        :is_return=>true}
+      """
