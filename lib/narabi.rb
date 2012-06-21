@@ -1,2 +1,2 @@
-#require "narabi/version"
-#require "narabi/parser"
+require "narabi/version"
+require "narabi/parser"
